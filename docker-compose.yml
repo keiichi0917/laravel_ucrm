@@ -22,10 +22,10 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: laravel_ucrm
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_USER: laravel_ucrm
+      MYSQL_PASSWORD: password123
     volumes:
       - dbdata:/var/lib/mysql
     ports:
