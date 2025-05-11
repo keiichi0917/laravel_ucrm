@@ -2,7 +2,7 @@ services:
   web:
     build: ./docker/nginx
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - ./src:/var/www/html
     depends_on:
@@ -37,6 +37,15 @@ services:
     volumes:
       - ./src:/var/www/html
     command: ["sh", "-c", "chmod -R 775 /var/www/html && tail -f /dev/null"]
+
+  node:
+    image: node:18
+    working_dir: /var/www/html
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev"
 
 volumes:
   dbdata:
