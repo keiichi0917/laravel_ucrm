@@ -23,6 +23,7 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
+                devtools: true, // ← これを追加！
             },
         }),
     ],
