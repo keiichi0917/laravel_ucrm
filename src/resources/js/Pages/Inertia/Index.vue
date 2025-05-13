@@ -2,6 +2,8 @@
 </script>
 
 <template>
-  <div>ああああ</div>
+  <div>
+    <h1>ああああ</h1>
+  </div>
 </template>
 
