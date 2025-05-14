@@ -5,45 +5,54 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\InertiaTest;
-//use Illuminate\Support\Facades\Log;
 
 class InertiaTestController extends Controller
 {
+    /**
+     * 一覧表示
+     */
     public function index()
     {
-        return Inertia::render('Inertia/Index');
+        $items = InertiaTest::all();
+
+        return Inertia::render('Inertia/Index', [
+            'items' => $items,
+        ]);
     }
 
+    /**
+     * 作成フォーム表示
+     */
     public function create()
     {
         return Inertia::render('Inertia/Create');
     }
 
+    /**
+     * 詳細表示
+     */
     public function show($id)
     {
-        // dd($id);
-        return Inertia::render(
-            'Inertia/Show',
-            [
-                'id' => $id
-            ]
-        );
+        $item = InertiaTest::findOrFail($id);
+
+        return Inertia::render('Inertia/Show', [
+            'id' => $id,
+            'item' => $item,
+        ]);
     }
 
+    /**
+     * データ登録
+     */
     public function store(Request $request)
     {
- //       Log::info('store() に送られてきたデータ', $request->all());
-        
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
         ]);
 
-        $inertiaTest = new InertiaTest;
-        $inertiaTest->title = $validated['title'];
-        $inertiaTest->content = $validated['content'];
-        $inertiaTest->save();
+        InertiaTest::create($validated); // ← $fillable をモデルに定義している前提
 
-        return Inertia::location(route('inertia.index'));
+        return to_route('inertia.index')->with('message', '登録しました');
     }
 }

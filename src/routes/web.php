@@ -6,17 +6,24 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\InertiaTestController;
 
-Route::get('/inertia-test', function () {
-    return Inertia::render('InertiaTest');
+/*
+|--------------------------------------------------------------------------
+| InertiaTest 用のルーティング
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('inertia')->name('inertia.')->group(function () {
+    Route::get('/', [InertiaTestController::class, 'index'])->name('index');          // /inertia
+    Route::get('/create', [InertiaTestController::class, 'create'])->name('create');  // /inertia/create
+    Route::post('/', [InertiaTestController::class, 'store'])->name('store');         // POST /inertia
+    Route::get('/show/{id}', [InertiaTestController::class, 'show'])->name('show');   // /inertia/show/1
 });
 
-Route::get('/inertia/index', [InertiaTestController::class, 'index'])->name('inertia.index');
-
-Route::get('/inertia/create', [InertiaTestController::class, 'create'])->name('inertia.create');
-
-Route::post('/inertia', [InertiaTestController::class, 'store'])->name('inertia.store');
-
-Route::get('/inertia/show/{id}', [InertiaTestController::class, 'show'])->name('inertia.show');
+/*
+|--------------------------------------------------------------------------
+| その他の標準ルーティング
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
