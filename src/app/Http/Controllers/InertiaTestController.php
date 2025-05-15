@@ -11,12 +11,11 @@ class InertiaTestController extends Controller
     /**
      * 一覧表示
      */
+    
     public function index()
     {
-        $items = InertiaTest::all();
-
         return Inertia::render('Inertia/Index', [
-            'items' => $items,
+            'blogs' => InertiaTest::all()
         ]);
     }
 
