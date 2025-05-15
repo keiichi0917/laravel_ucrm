@@ -17,6 +17,7 @@ Route::prefix('inertia')->name('inertia.')->group(function () {
     Route::get('/create', [InertiaTestController::class, 'create'])->name('create');  // /inertia/create
     Route::post('/', [InertiaTestController::class, 'store'])->name('store');         // POST /inertia
     Route::get('/show/{id}', [InertiaTestController::class, 'show'])->name('show');   // /inertia/show/1
+    Route::delete('{id}', [InertiaTestController::class, 'delete'])->name('delete');
 });
 
 /*
