@@ -12,6 +12,13 @@ use App\Http\Controllers\InertiaTestController;
 |--------------------------------------------------------------------------
 */
 
+Route::get(
+    '/Component-test',
+    function () {
+        return Inertia::render('ComponentTest');
+    }
+);
+
 Route::prefix('inertia')->name('inertia.')->group(function () {
     Route::get('/', [InertiaTestController::class, 'index'])->name('index');          // /inertia
     Route::get('/create', [InertiaTestController::class, 'create'])->name('create');  // /inertia/create
@@ -45,4 +52,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
