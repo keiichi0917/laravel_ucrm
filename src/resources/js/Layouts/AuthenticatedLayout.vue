@@ -35,11 +35,18 @@ const showingNavigationDropdown = ref(false);
                             >
                                 <NavLink
                                     :href="route('dashboard')"
+
                                     :active="route().current('dashboard')"
                                 >
                                     Dashboard
                                 </NavLink>
-                            </div>
+                                 <NavLink
+                                    :href="route('items.index')"
+
+                                    :active="route().current('items.index')"
+                                >
+                                    商品管理
+                                </NavLink>                           </div>
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">
@@ -145,6 +152,12 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('dashboard')"
                         >
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('items.index')"
+                            :active="route().current('items.index')"
+                        >
+                            商品管理
                         </ResponsiveNavLink>
                     </div>
 
