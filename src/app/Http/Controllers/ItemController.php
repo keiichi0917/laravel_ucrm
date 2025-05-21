@@ -51,8 +51,14 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return Inertia::render(
+            'Items/Show',
+            [
+                'item' => $item
+            ]
+        );
     }
+
 
     /**
      * Show the form for editing the specified resource.
