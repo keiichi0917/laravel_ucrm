@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import { nl2br } from '@common';
 
 defineProps({
     item: Object,
@@ -48,10 +49,9 @@ defineProps({
                                                     >メモ</label
                                                 >
                                                 <div
+                                                    v-html="nl2br(item.memo)"
                                                     class="h-32 w-full resize-none rounded border border-gray-300 bg-opacity-50 px-3 py-1 text-base leading-6 text-gray-700"
-                                                >
-                                                    {{ item.memo }}
-                                                </div>
+                                                ></div>
                                             </div>
                                         </div>
 
@@ -91,6 +91,17 @@ defineProps({
                                                 </div>
                                             </div>
                                         </div>
+                                        <Link
+                                            as="button"
+                                            :href="
+                                                route('items.edit', {
+                                                    item: item.id,
+                                                })
+                                            "
+                                            class="mx-auto flex rounded border-0 bg-indigo-500 px-8 py-2 text-lg text-white hover:bg-indigo-600 focus:outline-none"
+                                        >
+                                            編集する
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

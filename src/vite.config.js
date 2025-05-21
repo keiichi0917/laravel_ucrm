@@ -31,6 +31,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'), // ✅ '@/～' を 'resources/js/～' にマッピング
+            '@common': path.resolve(__dirname, 'resources/js/common.js'), // ← ここをファイルに直接指定
         },
     },
 });
