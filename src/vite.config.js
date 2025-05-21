@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import path from 'path'; // ✅ 追加
 
 export default defineConfig({
     server: {
@@ -8,10 +9,10 @@ export default defineConfig({
         port: 5173,
         strictPort: true,
         hmr: {
-        host: 'localhost',
-        protocol: 'http', // HTTPS でない場合
+            host: 'localhost',
+            protocol: 'http', // HTTPS を使わない場合は 'http'
         },
-     },
+    },
     plugins: [
         laravel({
             input: 'resources/js/app.js',
@@ -23,8 +24,13 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
-                devtools: true, // ← これを追加！
+                devtools: true, // ✅ Vue Devtools 有効化（オプション）
             },
         }),
     ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'resources/js'), // ✅ '@/～' を 'resources/js/～' にマッピング
+        },
+    },
 });

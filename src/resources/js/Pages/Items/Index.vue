@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import FlashMessage from '@/Components/FlashMessage.vue';
 
 defineProps({
     items: Array,
@@ -23,17 +24,20 @@ defineProps({
                     <div class="p-6 text-gray-900">
                         <section class="body-font text-gray-600">
                             <div class="container mx-auto px-5 py-8">
+                                <FlashMessage />
                                 <div
                                     class="mx-auto w-full overflow-auto lg:w-2/3"
                                 >
                                     <div
                                         class="mx-auto mt-4 flex w-full pl-4 lg:w-2/3"
                                     >
-                                        <button
+                                        <Link
+                                            as="button"
+                                            :href="route('items.create')"
                                             class="ml-auto flex rounded border-0 bg-indigo-500 px-6 py-2 text-white hover:bg-indigo-600 focus:outline-none"
                                         >
-                                            Button
-                                        </button>
+                                            商品登録
+                                        </Link>
                                     </div>
 
                                     <table
@@ -89,19 +93,19 @@ defineProps({
                                                 <td
                                                     class="border-b-2 border-gray-200 px-4 py-3"
                                                 >
-                                                    <SPAN
+                                                    <span
                                                         v-if="
                                                             item.is_selling ===
                                                             1
                                                         "
-                                                        >販売中</SPAN
+                                                        >販売中</span
                                                     >
-                                                    <SPAN
+                                                    <span
                                                         v-if="
                                                             item.is_selling ===
                                                             0
                                                         "
-                                                        >停止中</SPAN
+                                                        >停止中</span
                                                     >
                                                 </td>
                                             </tr>
@@ -116,4 +120,3 @@ defineProps({
         </div>
     </AuthenticatedLayout>
 </template>
-s
