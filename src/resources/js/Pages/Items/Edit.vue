@@ -17,8 +17,8 @@ const form = reactive({
     is_selling: props.item.is_selling,
 });
 
-const storeItem = () => {
-    Inertia.post('/items', form);
+const updateItem = (id) => {
+    Inertia.put(route('items.update', { item: id }), form);
 };
 </script>
 
@@ -37,7 +37,7 @@ const storeItem = () => {
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <section class="body-font relative text-gray-600">
-                            <form @submit.prevent="storeItem">
+                            <form @submit.prevent="updateItem(form.id)">
                                 <div class="container mx-auto px-5 py-8">
                                     <div class="mx-auto md:w-2/3 lg:w-1/2">
                                         <div class="-m-2 flex flex-wrap">
@@ -114,6 +114,46 @@ const storeItem = () => {
                                                     <!-- ← エラー表示 -->
                                                 </div>
                                             </div>
+                                            <div class="w-full p-2">
+                                                <div class="relative">
+                                                    <label
+                                                        for="is_selling"
+                                                        class="text-sm leading-7 text-gray-600"
+                                                        >ステータス</label
+                                                    >
+                                                    <input
+                                                        type="radio"
+                                                        id="is_selling"
+                                                        name="is_selling"
+                                                        v-model="
+                                                            form.is_selling
+                                                        "
+                                                        value="1"
+                                                    />
+                                                    <label class="ml-2 mr-4"
+                                                        >販売中</label
+                                                    >
+                                                    <input
+                                                        type="radio"
+                                                        id="is_selling"
+                                                        name="is_selling"
+                                                        v-model="
+                                                            form.is_selling
+                                                        "
+                                                        value="0"
+                                                    />
+                                                    <label class="ml-2 mr-4"
+                                                        >停止中</label
+                                                    >
+                                                    <p
+                                                        v-if="errors.price"
+                                                        class="mt-1 text-sm text-red-500"
+                                                    >
+                                                        {{ errors.price }}
+                                                    </p>
+                                                    <!-- ← エラー表示 -->
+                                                </div>
+                                            </div>
 
                                             <!-- 登録ボタン -->
                                             <div class="w-full p-2">
@@ -121,7 +161,7 @@ const storeItem = () => {
                                                     type="submit"
                                                     class="mx-auto flex rounded border-0 bg-indigo-500 px-8 py-2 text-lg text-white hover:bg-indigo-600 focus:outline-none"
                                                 >
-                                                    商品編集
+                                                    更新する
                                                 </button>
                                             </div>
                                         </div>

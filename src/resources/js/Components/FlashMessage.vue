@@ -7,4 +7,10 @@
     >
         {{ $page.props.flash.message }}
     </div>
+    <div
+        v-if="$page.props.flash.status === 'danger'"
+        class="mb-4 rounded bg-red-300 p-4 text-white"
+    >
+        {{ $page.props.flash.message }}
+    </div>
 </template>
