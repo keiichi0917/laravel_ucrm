@@ -1,5 +1,10 @@
 {
   "git.enabled": true,
   "git.decorations.enabled": true,
-  "workbench.statusBar.visible": true
+  "workbench.statusBar.visible": true,
+    "[php]": {
+    "editor.formatOnSave": true
+  },
+  "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+
 }
