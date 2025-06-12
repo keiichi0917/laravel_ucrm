@@ -25,6 +25,7 @@ onMounted(() => {
 const itemList = ref([]); // リアクティブな配列を準備
 
 const form = reactive({
+    id: props.order[0].id,
     date: dayjs(props.order[0].created_at).format('YYYY-MM-DD'),
     customer_id: props.order[0].customer_id,
     status: props.order[0].status,
@@ -39,19 +40,19 @@ const totalPrice = computed(() => {
     return total;
 });
 
-const storePurchase = () => {
+const updatePurchase = (id) => {
     itemList.value.forEach((item) => {
         if (item.quantity > 0)
             // 0より大きいものだけ追加
             form.items.push({ id: item.id, quantity: item.quantity });
     });
-    Inertia.post(route('purchases.store'), form);
+    Inertia.put(route('purchases.update', { purchase: id }), form);
 };
 
 const quantity = Array.from({ length: 10 }, (_, i) => i);
 </script>
 <template>
-    <form @submit.prevent="storePurchase">
+    <form @submit.prevent="updatePurchase(form.id)">
         日付<br />
         <input disabled type="date" name="date" :value="form.date" />
         <br />
@@ -94,8 +95,6 @@ const quantity = Array.from({ length: 10 }, (_, i) => i);
         </table>
         <br />
         合計 {{ totalPrice }} 円<br />
-        <button>登録する</button>
-        会員名<br />
         <input
             type="radio"
             id="status"
@@ -113,5 +112,6 @@ const quantity = Array.from({ length: 10 }, (_, i) => i);
         />
         キャンセルする
         <br /><br />
+        <button>更新する</button>
     </form>
 </template>
