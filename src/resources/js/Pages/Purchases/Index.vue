@@ -97,18 +97,17 @@ onMounted(() => {
                                                     class="border-b-2 border-gray-200 px-4 py-3"
                                                 >
                                                     <Link
-                                                        class="text-blue-400"
                                                         :href="
                                                             route(
-                                                                'items.show',
+                                                                'purchases.show',
                                                                 {
-                                                                    item: order.id,
+                                                                    purchase:
+                                                                        order.id,
                                                                 },
                                                             )
                                                         "
+                                                        >{{ order.id }}</Link
                                                     >
-                                                        {{ order.id }}
-                                                    </Link>
                                                 </td>
                                                 <td
                                                     class="border-b-2 border-gray-200 px-4 py-3"
